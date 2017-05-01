@@ -1,1 +1,1 @@
-A program that using ASCII characters draws function graph on a terminal.
+A program that uses ASCII characters to draw 2D function graph, with respect to variables x and y, on a terminal.
