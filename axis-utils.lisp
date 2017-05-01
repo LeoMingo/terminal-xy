@@ -2,10 +2,11 @@
   (:use gblock)
   (:export :draw-axis
            :big-char-insert
-    ;       :axis-x-output   ;This is for the outputing of input Xs of required points a function, which are limited by the zoom-measure value
-           
-    ;       :zoom-measure-set
+          
+    ;       :zoom-measure-setter
     ))
+
+
 
 
 (defvar sp " ") ; space
@@ -110,7 +111,7 @@
   (setf (aref gb-map bigX bigY) big-char))
 ||#
 (defmacro big-char-insert (big-char gm-v gm-h)
-  `(setf (aref gb-map gm-v gm-h) ,big-char))
+  `(setf (aref *gb-map* gm-v gm-h) ,big-char))
 
 (defun insert-arrow-head (xy-op)
   (cond ((equal xy-op "y")

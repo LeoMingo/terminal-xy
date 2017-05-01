@@ -6,8 +6,9 @@
            :positive-x-axis-len
            :positive-y-axis-len
 
-           :gblock
-           :gb-map
+           :*gblock*
+           :*gb-map*
+           :gb-map-init
            :gb-map-printer
            :x-to-gb-index
            :y-to-gb-index
