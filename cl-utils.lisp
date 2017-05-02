@@ -33,8 +33,7 @@
               :fill-pointer (length arr)
               ;:fill-pointer t
               :adjustable t
-              :initial-contents arr
-              :element-type (array-element-type arr)))
+              :initial-contents arr))
 
 (defun make-adjustable-string (str) 
   (make-array (length str)

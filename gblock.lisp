@@ -22,10 +22,10 @@
 ;;gm vert and horiz lengths have to be even numbers
 ;;since it makes more sense after we trim off the arrows and the origin axis
 ;;we have 2 axis that have the same lengths
-;(defparameter +gm-vert-len+ 20)
-;(defparameter +gm-horiz-len+ 20)
-(defconstant +gm-vert-len+ 4)
-(defconstant +gm-horiz-len+ 4)
+(defconstant +gm-vert-len+ 20)
+(defconstant +gm-horiz-len+ 20)
+;(defconstant +gm-vert-len+ 6)
+;(defconstant +gm-horiz-len+ 6)
 
 (defvar *x-axis-len* (* +gb-horiz-len+ +gm-horiz-len+))
 (defvar *y-axis-len* (* +gb-vert-len+  +gm-vert-len+))
@@ -89,8 +89,8 @@ we have to add 1 as well"
          (gb-x-remainder (cadr x-list))
          (gm-y-idx (car y-list))
          (gb-y-remainder (cadr y-list)))
-        (format t "~a~a~a~a" gm-x-idx gm-y-idx gb-x-remainder gb-y-remainder)
-        (setf (aref (aref *gb-map* gm-x-idx gm-y-idx) gb-x-remainder gb-y-remainder) elem))
+        (format t "xy->gb-index Insertion: x->gb-index(~a ~a) y->gb-index(~a ~a) elem(~a)~%" gm-x-idx gm-y-idx gb-x-remainder gb-y-remainder elem)
+        (setf (aref (aref *gb-map* gm-y-idx gm-x-idx) gb-y-remainder gb-x-remainder) elem))
    ))
 
 

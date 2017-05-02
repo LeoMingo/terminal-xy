@@ -88,12 +88,12 @@
 
 (defvar *y-axis-arrow-head1* 
 `((,sp ,sp ,sp ,sp ,sp ,sp "^")
-  (,sp ,sp ,sp ,sp ,sp "/" ,sp)
-  (,sp ,sp ,sp ,sp "/" ,sp ,sp)
-  (,sp ,sp ,sp "/" ,sp ,sp ,sp)
-  (,sp ,sp "/" ,sp ,sp ,sp ,sp)
-  (,sp "/" ,sp ,sp ,sp ,sp ,sp)
-  ("/" ,sp ,sp ,sp ,sp ,sp ,sp)
+  (,sp ,sp ,sp ,sp ,sp "/" ,"|")
+  (,sp ,sp ,sp ,sp "/" ,sp ,"|")
+  (,sp ,sp ,sp "/" ,sp ,sp ,"|")
+  (,sp ,sp "/" ,sp ,sp ,sp ,"|")
+  (,sp "/" ,sp ,sp ,sp ,sp ,"|")
+  ("/" ,sp ,sp ,sp ,sp ,sp ,"|")
   ))
 (defvar *y-axis-arrow-head2*
 `((,sp ,sp ,sp ,sp ,sp ,sp ,sp)
@@ -110,8 +110,15 @@
 (defun big-char-in,sert (big-char bigX bigY)
   (setf (aref gb-map bigX bigY) big-char))
 ||#
-(defmacro big-char-insert (big-char gm-v gm-h)
-  `(setf (aref *gb-map* gm-v gm-h) ,big-char))
+;(defmacro big-char-insert (big-char gm-v gm-h)
+;  `(setf (aref *gb-map* gm-v gm-h) ,big-char))
+
+(defun big-char-insert (big-char gm-v gm-h)
+  (let ((bc2Darray (make-array `(,+gb-vert-len+ ,+gb-horiz-len+) 
+                               :adjustable t
+                               :initial-contents big-char)))
+  (setf (aref *gb-map* gm-v gm-h) bc2Darray))
+  nil)
 
 (defun insert-arrow-head (xy-op)
   (cond ((equal xy-op "y")
@@ -125,16 +132,18 @@
 
 (defun x-axis-drawer ()
   (dotimes (x *x-axis-len*)
-    (insert-point x 0 "-"))
+    (insert-point (- x *positive-x-axis-len*) 0 "-"))
   (insert-arrow-head "x"))
 
 (defun y-axis-drawer ()
   (dotimes (y *x-axis-len*)
-    (insert-point 0 y "|"))
+    (insert-point 0 (- y *positive-y-axis-len*) "|"))
   (insert-arrow-head "y"))
 
+
+(defconstant +origin-character+ "+")
 (defun origin-drawer ()
-  (insert-point 0 0 "+"))
+  (insert-point 0 0 +origin-character+))
 
 (defun draw-axis ()
   (x-axis-drawer)
